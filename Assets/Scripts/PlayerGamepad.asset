@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee213a392d6e42029ce6b9cfc4ebd9f, type: 3}
+  m_Name: PlayerGamepad
+  m_EditorClassIdentifier: 
+  ice: {fileID: 8941444822861896046, guid: b31435c2830504426af8f7291067180c, type: 3}
+  Fire: {fileID: 3168705074650701356, guid: 3f8197279a333474d9bd81c0f12889ac, type: 3}
+  Bolt: {fileID: 0}
+  _fallMultiplier: 3
+  _jumpHeight: 9.5
+  _speed: 8
+  _coyoteTime: 0.2
+  _cooldown: 10
+  Rolling: 0
+  Jumping: 0
+  JumpInitiated: 0
+  Lightweight: 0
