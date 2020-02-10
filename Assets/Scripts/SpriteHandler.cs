@@ -36,9 +36,10 @@ public class SpriteHandler : MonoBehaviour
             transform.localScale = scale;
             _flipped = true;
         }
-        _ani.SetFloat("HorizontalSpeed", Mathf.Abs(_player.velocity.x)/ _playerActor.Speed);
+        //_ani.SetFloat("HorizontalSpeed", Mathf.Abs(_player.velocity.x)/ _playerActor.Speed);
+        _ani.SetFloat("HorizontalSpeed", Mathf.Abs(_player.velocity.x));
         _ani.SetFloat("VerticalSpeed", _player.velocity.y);
        
-        //Debug.Log(_player.velocity.y);
+        Debug.Log(_player.velocity.y);
     }
 }

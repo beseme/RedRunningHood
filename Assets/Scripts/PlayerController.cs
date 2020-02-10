@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _walljumpForce = 0;
     [SerializeField] private float _slideSpeed = 0;
     [SerializeField] private Vector2 _walljumpAngle = Vector2.zero;
-    
+    [SerializeField] private Animator _ani = null;
+
 
     private InputPad _gamepad = null;
+
 
     private RaycastHit2D[] _rays = new RaycastHit2D[6]; 
 
@@ -67,8 +69,6 @@ public class PlayerController : MonoBehaviour
         else
             _inputX = 0;
 
-        Debug.Log(_inAir);
-
         //wait for coyotetime to run out before setting inAir to true
         _coyoteTime -= Time.deltaTime;
     }
@@ -86,12 +86,17 @@ public class PlayerController : MonoBehaviour
 
         //slow down when sliding down a wall
         if (_onWall && _rig.velocity.y <= -_slideSpeed)
+        {
+            _ani.SetBool("OnWall", true);
             _rig.velocity = new Vector2(_rig.velocity.x, -_slideSpeed);
+        }
+
+        if(!_onWall)
+        _ani.SetBool("OnWall", false);
+
 
         //check for collisions with floor and rails
-        CollisionCheck();
-
-       
+        CollisionCheck();       
     }
 
     // this is needed for the input system to detect input
