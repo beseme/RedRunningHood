@@ -207,7 +207,7 @@
                 {
                     "name": "",
                     "id": "53fd98e0-a950-4c8a-89ce-03f01357c759",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -218,7 +218,7 @@
                 {
                     "name": "",
                     "id": "a05d53eb-800f-4187-8551-dbcee2680284",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

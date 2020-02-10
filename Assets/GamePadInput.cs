@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class InputPad : IInputActionCollection, IDisposable
+public class @InputPad : IInputActionCollection, IDisposable
 {
-    private InputActionAsset asset;
-    public InputPad()
+    public InputActionAsset asset { get; }
+    public @InputPad()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""GamePad"",
@@ -220,7 +220,7 @@ public class InputPad : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""53fd98e0-a950-4c8a-89ce-03f01357c759"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -231,7 +231,7 @@ public class InputPad : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a05d53eb-800f-4187-8551-dbcee2680284"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -393,8 +393,8 @@ public class InputPad : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Fire2;
     public struct GameplayActions
     {
-        private InputPad m_Wrapper;
-        public GameplayActions(InputPad wrapper) { m_Wrapper = wrapper; }
+        private @InputPad m_Wrapper;
+        public GameplayActions(@InputPad wrapper) { m_Wrapper = wrapper; }
         public InputAction @Run => m_Wrapper.m_Gameplay_Run;
         public InputAction @Roll => m_Wrapper.m_Gameplay_Roll;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
@@ -419,100 +419,100 @@ public class InputPad : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                Run.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
-                Run.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
-                Run.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
-                Roll.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
-                Roll.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
-                Roll.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
-                Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                Time.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
-                Time.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
-                Time.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
-                Ice.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce;
-                Ice.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce;
-                Ice.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce;
-                Electric.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric;
-                Electric.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric;
-                Electric.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric;
-                Fire.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
-                Fire.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
-                Fire.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
-                RunL.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunL;
-                RunL.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunL;
-                RunL.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunL;
-                RunR.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunR;
-                RunR.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunR;
-                RunR.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunR;
-                Jump2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump2;
-                Jump2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump2;
-                Jump2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump2;
-                Roll2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll2;
-                Roll2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll2;
-                Roll2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll2;
-                Time2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime2;
-                Time2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime2;
-                Time2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime2;
-                Ice2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce2;
-                Ice2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce2;
-                Ice2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce2;
-                Electric2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric2;
-                Electric2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric2;
-                Electric2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric2;
-                Fire2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
-                Fire2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
-                Fire2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
+                @Run.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
+                @Roll.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
+                @Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
+                @Time.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
+                @Time.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
+                @Time.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime;
+                @Ice.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce;
+                @Ice.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce;
+                @Ice.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce;
+                @Electric.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric;
+                @Electric.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric;
+                @Electric.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric;
+                @Fire.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire;
+                @RunL.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunL;
+                @RunL.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunL;
+                @RunL.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunL;
+                @RunR.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunR;
+                @RunR.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunR;
+                @RunR.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRunR;
+                @Jump2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump2;
+                @Jump2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump2;
+                @Jump2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump2;
+                @Roll2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll2;
+                @Roll2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll2;
+                @Roll2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll2;
+                @Time2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime2;
+                @Time2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime2;
+                @Time2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTime2;
+                @Ice2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce2;
+                @Ice2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce2;
+                @Ice2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnIce2;
+                @Electric2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric2;
+                @Electric2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric2;
+                @Electric2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnElectric2;
+                @Fire2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
+                @Fire2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
+                @Fire2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Run.started += instance.OnRun;
-                Run.performed += instance.OnRun;
-                Run.canceled += instance.OnRun;
-                Roll.started += instance.OnRoll;
-                Roll.performed += instance.OnRoll;
-                Roll.canceled += instance.OnRoll;
-                Jump.started += instance.OnJump;
-                Jump.performed += instance.OnJump;
-                Jump.canceled += instance.OnJump;
-                Time.started += instance.OnTime;
-                Time.performed += instance.OnTime;
-                Time.canceled += instance.OnTime;
-                Ice.started += instance.OnIce;
-                Ice.performed += instance.OnIce;
-                Ice.canceled += instance.OnIce;
-                Electric.started += instance.OnElectric;
-                Electric.performed += instance.OnElectric;
-                Electric.canceled += instance.OnElectric;
-                Fire.started += instance.OnFire;
-                Fire.performed += instance.OnFire;
-                Fire.canceled += instance.OnFire;
-                RunL.started += instance.OnRunL;
-                RunL.performed += instance.OnRunL;
-                RunL.canceled += instance.OnRunL;
-                RunR.started += instance.OnRunR;
-                RunR.performed += instance.OnRunR;
-                RunR.canceled += instance.OnRunR;
-                Jump2.started += instance.OnJump2;
-                Jump2.performed += instance.OnJump2;
-                Jump2.canceled += instance.OnJump2;
-                Roll2.started += instance.OnRoll2;
-                Roll2.performed += instance.OnRoll2;
-                Roll2.canceled += instance.OnRoll2;
-                Time2.started += instance.OnTime2;
-                Time2.performed += instance.OnTime2;
-                Time2.canceled += instance.OnTime2;
-                Ice2.started += instance.OnIce2;
-                Ice2.performed += instance.OnIce2;
-                Ice2.canceled += instance.OnIce2;
-                Electric2.started += instance.OnElectric2;
-                Electric2.performed += instance.OnElectric2;
-                Electric2.canceled += instance.OnElectric2;
-                Fire2.started += instance.OnFire2;
-                Fire2.performed += instance.OnFire2;
-                Fire2.canceled += instance.OnFire2;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Time.started += instance.OnTime;
+                @Time.performed += instance.OnTime;
+                @Time.canceled += instance.OnTime;
+                @Ice.started += instance.OnIce;
+                @Ice.performed += instance.OnIce;
+                @Ice.canceled += instance.OnIce;
+                @Electric.started += instance.OnElectric;
+                @Electric.performed += instance.OnElectric;
+                @Electric.canceled += instance.OnElectric;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+                @RunL.started += instance.OnRunL;
+                @RunL.performed += instance.OnRunL;
+                @RunL.canceled += instance.OnRunL;
+                @RunR.started += instance.OnRunR;
+                @RunR.performed += instance.OnRunR;
+                @RunR.canceled += instance.OnRunR;
+                @Jump2.started += instance.OnJump2;
+                @Jump2.performed += instance.OnJump2;
+                @Jump2.canceled += instance.OnJump2;
+                @Roll2.started += instance.OnRoll2;
+                @Roll2.performed += instance.OnRoll2;
+                @Roll2.canceled += instance.OnRoll2;
+                @Time2.started += instance.OnTime2;
+                @Time2.performed += instance.OnTime2;
+                @Time2.canceled += instance.OnTime2;
+                @Ice2.started += instance.OnIce2;
+                @Ice2.performed += instance.OnIce2;
+                @Ice2.canceled += instance.OnIce2;
+                @Electric2.started += instance.OnElectric2;
+                @Electric2.performed += instance.OnElectric2;
+                @Electric2.canceled += instance.OnElectric2;
+                @Fire2.started += instance.OnFire2;
+                @Fire2.performed += instance.OnFire2;
+                @Fire2.canceled += instance.OnFire2;
             }
         }
     }

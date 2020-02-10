@@ -6,7 +6,7 @@ using UnityEngine.WSA;
 
 public class CheckForObjects : MonoBehaviour
 {
-    [SerializeField] private Player _inputRef = null;
+    [SerializeField] private PlayerController _inputRef = null;
     private BoxCollider2D _coll = null;
 
     private void Awake()

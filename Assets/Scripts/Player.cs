@@ -84,10 +84,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _floorHit1 = Physics2D.Raycast(RayOrigin1.position, -Vector2.up, .15f, LayerMask.GetMask("Floor", "Walljumprail"));
-        _floorHit2 = Physics2D.Raycast(RayOrigin2.position, -Vector2.up, .15f, LayerMask.GetMask("Floor", "Walljumprail"));
-        _leftWall = Physics2D.Raycast(RayL.position, Vector2.left, .1f, LayerMask.GetMask("Walljumprail"));
-        _rightWall = Physics2D.Raycast(RayR.position, Vector2.right, .1f, LayerMask.GetMask("Walljumprail"));
+        Collisions();
+
         if (_leftWall || _rightWall)
         {
             _lateJumpReset = ActorObject.CoyoteTime;
@@ -130,10 +128,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (_stickAxis.x > 0)
-            _move = _stickAxis.magnitude;
+        if (_stickAxis.x > .5f)
+            _move = 1;
+        else if (_stickAxis.x < -.5f)
+            _move = -1;
         else
-            _move = -_stickAxis.magnitude;
+            _move = 0;
         
         //flip direction
         if (_rig.velocity.x > 0)
@@ -152,6 +152,14 @@ public class Player : MonoBehaviour
     private void OnEnable() => _pad.Gameplay.Enable();
     private void OnDisable() => _pad.Gameplay.Disable();
 
+    void Collisions()
+    {
+        _floorHit1 = Physics2D.Raycast(RayOrigin1.position, -Vector2.up, .15f, LayerMask.GetMask("Floor", "Walljumprail"));
+        _floorHit2 = Physics2D.Raycast(RayOrigin2.position, -Vector2.up, .15f, LayerMask.GetMask("Floor", "Walljumprail"));
+        _leftWall = Physics2D.Raycast(RayL.position, Vector2.left, .1f, LayerMask.GetMask("Walljumprail"));
+        _rightWall = Physics2D.Raycast(RayR.position, Vector2.right, .1f, LayerMask.GetMask("Walljumprail"));
+    }
+
     void AccelerateLeft() => _stickAxis = new Vector2(-1,0);
     void AccelerateRight() => _stickAxis = new Vector2(1,0);
     void Decelerate() => _stickAxis = Vector2.zero;
@@ -162,15 +170,9 @@ public class Player : MonoBehaviour
         {
             if (!ActorObject.Jumping)
             {
-                if (_leftWall)
+                if (_leftWall || _rightWall)
                 {
-                    _rig.velocity = new Vector2(_rig.velocity.x, 0);
-                    _rig.AddForce(new Vector2(_rig.velocity.x + ActorObject.JumpHeight * 50, ActorObject.JumpHeight * 70));
-                }
-                else if (_rightWall)
-                {
-                    _rig.velocity = new Vector2(_rig.velocity.x, 0);
-                    _rig.AddForce(new Vector2(_rig.velocity.x - ActorObject.JumpHeight * 50, ActorObject.JumpHeight * 70));
+                    WallJump();
                 }
                 else
                 {
@@ -190,6 +192,20 @@ public class Player : MonoBehaviour
         {
                 ManageRoll(false, RollLoc);
                 RollObj.SetActive(false);
+        }
+    }
+
+    void WallJump()
+    {
+        if (_leftWall && _stickAxis.x > -.1f)
+        {
+            _rig.velocity = new Vector2(_rig.velocity.x, 0);
+            _rig.AddForce(new Vector2(_rig.velocity.x + ActorObject.JumpHeight * 50, ActorObject.JumpHeight * 70));
+        }
+        else if (_rightWall && _stickAxis.x < .1f)
+        {
+            _rig.velocity = new Vector2(_rig.velocity.x, 0);
+            _rig.AddForce(new Vector2(_rig.velocity.x - ActorObject.JumpHeight * 50, ActorObject.JumpHeight * 70));
         }
     }
     
