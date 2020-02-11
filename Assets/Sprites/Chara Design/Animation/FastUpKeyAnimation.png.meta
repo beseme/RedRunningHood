@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: d26ea98e6ce788b49959a7309624115c
+guid: b2b981ad8bfc33c45a96672e9079cb2a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4072598593252468119
-    second: jump1_0
+      213: -5210862287563892655
+    second: FastUpKeyAnimation_0
   - first:
-      213: 9166087527515345898
-    second: jump1_1
+      213: -7575717577273074115
+    second: FastUpKeyAnimation_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -81,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jump1_0
+      name: FastUpKeyAnimation_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a77ad939881d984e908aea00c9c3b56
-      internalID: 4072598593252468119
+      spriteID: ec83ed896b9472e43b050599f3e50633
+      internalID: -5210862287563892655
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump1_1
+      name: FastUpKeyAnimation_1
       rect:
         serializedVersion: 2
         x: 100
@@ -139,8 +139,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3852b5b9615b2bb438e4317788c24b17
-      internalID: 9166087527515345898
+      spriteID: 1a9b2004d0e964941a688450598f275e
+      internalID: -7575717577273074115
       vertices: []
       indices: 
       edges: []

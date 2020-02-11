@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/UI.unity
     guid: 3259d9189a7fe45ea9bc2f263dac3df1
   - enabled: 1
-    path: Assets/Scenes/InGameScene.unity
+    path: Assets/Scenes/test scenes/InGameScene.unity
     guid: c30b3187e9ff3425ba4ef8f57dc91961
   - enabled: 1
-    path: Assets/Scenes/FireLevel.unity
+    path: Assets/Scenes/test scenes/FireLevel.unity
     guid: 47555656b7b4f4f7eac7e1fa9accb1fb
   m_configObjects: {}

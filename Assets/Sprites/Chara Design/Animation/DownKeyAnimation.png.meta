@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 2dc3a00977d31b94491bf8f6751e4c0c
+guid: 4fd39c9428b8d7649b5010d06a9e67bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6137212783605098422
-    second: jump2_0
+      213: 3879601892905186074
+    second: DownKeyAnimation_0
   - first:
-      213: 8524696747595839397
-    second: jump2_1
+      213: -3487442639851928772
+    second: DownKeyAnimation_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -81,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jump2_0
+      name: DownKeyAnimation_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb74a5d043e9a8b4ab8d1326c19bf4f1
-      internalID: 6137212783605098422
+      spriteID: f7876a9c5144d69419709450991d8a50
+      internalID: 3879601892905186074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump2_1
+      name: DownKeyAnimation_1
       rect:
         serializedVersion: 2
         x: 100
@@ -139,8 +139,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89d2fb6e8c343af488baabf7f29d11fd
-      internalID: 8524696747595839397
+      spriteID: 7fc3c700b144b0844a42da72a03ed263
+      internalID: -3487442639851928772
       vertices: []
       indices: 
       edges: []

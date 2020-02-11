@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: newJumpDown
+  m_Name: SingleFrameSlide
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,10 +20,10 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 6137212783605098422, guid: 2dc3a00977d31b94491bf8f6751e4c0c,
+      value: {fileID: -8007097300910895736, guid: 01ab817f8ae57754f841de1a48511385,
         type: 3}
     - time: 0.083333336
-      value: {fileID: 8524696747595839397, guid: 2dc3a00977d31b94491bf8f6751e4c0c,
+      value: {fileID: 6749514832472672135, guid: 01ab817f8ae57754f841de1a48511385,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -44,8 +44,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 6137212783605098422, guid: 2dc3a00977d31b94491bf8f6751e4c0c, type: 3}
-    - {fileID: 8524696747595839397, guid: 2dc3a00977d31b94491bf8f6751e4c0c, type: 3}
+    - {fileID: -8007097300910895736, guid: 01ab817f8ae57754f841de1a48511385, type: 3}
+    - {fileID: 6749514832472672135, guid: 01ab817f8ae57754f841de1a48511385, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
