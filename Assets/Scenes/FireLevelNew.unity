@@ -9675,7 +9675,7 @@ MonoBehaviour:
   m_ZDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 20
+  m_CameraDistance: 10
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -10043,7 +10043,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.1792453, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.3207547, g: 0.122552514, b: 0.122552514, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -10059,7 +10059,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -10084,7 +10084,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322543921}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.48, y: -1.01, z: -20}
+  m_LocalPosition: {x: -1.9147525, y: -1.0100038, z: -9.999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10417,7 +10417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617019048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.48, y: -1.01, z: -20}
+  m_LocalPosition: {x: -4.48, y: -1.01, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 239358538}
@@ -10437,7 +10437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ConfineMode: 1
-  m_BoundingVolume: {fileID: 0}
+  m_BoundingVolume: {fileID: 991980938}
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
@@ -15349,6 +15349,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FollowObject
       objectReference: {fileID: 0}
+    - target: {fileID: 6063022176032474324, guid: c8efd1406652a40858d793438e0ec42e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 855200715675021494, guid: c8efd1406652a40858d793438e0ec42e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15764,8 +15769,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991980937}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.952, y: 12.781, z: -10}
-  m_LocalScale: {x: 4.551593, y: 291.42627, z: 6.9408484}
+  m_LocalPosition: {x: 2.74, y: 12.781, z: -10}
+  m_LocalScale: {x: 2.6499372, y: 291.42627, z: 6.9408484}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8

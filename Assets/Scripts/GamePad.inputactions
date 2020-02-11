@@ -293,6 +293,90 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Keyboard",
+            "id": "153ec28d-abd9-4b2a-9c86-8bbdb2268bae",
+            "actions": [
+                {
+                    "name": "RunL",
+                    "type": "Button",
+                    "id": "e79a0acc-143e-4476-8047-9707c4c427ab",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RunR",
+                    "type": "Button",
+                    "id": "6e58c978-b6a6-420b-aaeb-e28b54e646d7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "35c9c6f0-8c96-48d0-93f6-d50ad4c9fae9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Thunder",
+                    "type": "Button",
+                    "id": "db24e843-7ac5-4b83-ba89-67963a5fbce7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e33fab0b-bcbd-4934-a088-e62633ebeb29",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RunL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9589e0d2-4bb4-40b2-8e6e-2233979680d8",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RunR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04bcf8df-ab46-4b33-ac60-b3c10473d8d4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ecec24cf-16de-49a5-89e6-b76d58e3e8ac",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thunder",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

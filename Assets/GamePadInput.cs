@@ -306,6 +306,90 @@ public class @InputPad : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""id"": ""153ec28d-abd9-4b2a-9c86-8bbdb2268bae"",
+            ""actions"": [
+                {
+                    ""name"": ""RunL"",
+                    ""type"": ""Button"",
+                    ""id"": ""e79a0acc-143e-4476-8047-9707c4c427ab"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RunR"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e58c978-b6a6-420b-aaeb-e28b54e646d7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""35c9c6f0-8c96-48d0-93f6-d50ad4c9fae9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Thunder"",
+                    ""type"": ""Button"",
+                    ""id"": ""db24e843-7ac5-4b83-ba89-67963a5fbce7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e33fab0b-bcbd-4934-a088-e62633ebeb29"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RunL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9589e0d2-4bb4-40b2-8e6e-2233979680d8"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RunR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04bcf8df-ab46-4b33-ac60-b3c10473d8d4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ecec24cf-16de-49a5-89e6-b76d58e3e8ac"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thunder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -327,6 +411,12 @@ public class @InputPad : IInputActionCollection, IDisposable
         m_Gameplay_Ice2 = m_Gameplay.FindAction("Ice2", throwIfNotFound: true);
         m_Gameplay_Electric2 = m_Gameplay.FindAction("Electric2", throwIfNotFound: true);
         m_Gameplay_Fire2 = m_Gameplay.FindAction("Fire2", throwIfNotFound: true);
+        // Keyboard
+        m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
+        m_Keyboard_RunL = m_Keyboard.FindAction("RunL", throwIfNotFound: true);
+        m_Keyboard_RunR = m_Keyboard.FindAction("RunR", throwIfNotFound: true);
+        m_Keyboard_Jump = m_Keyboard.FindAction("Jump", throwIfNotFound: true);
+        m_Keyboard_Thunder = m_Keyboard.FindAction("Thunder", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -517,6 +607,63 @@ public class @InputPad : IInputActionCollection, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // Keyboard
+    private readonly InputActionMap m_Keyboard;
+    private IKeyboardActions m_KeyboardActionsCallbackInterface;
+    private readonly InputAction m_Keyboard_RunL;
+    private readonly InputAction m_Keyboard_RunR;
+    private readonly InputAction m_Keyboard_Jump;
+    private readonly InputAction m_Keyboard_Thunder;
+    public struct KeyboardActions
+    {
+        private @InputPad m_Wrapper;
+        public KeyboardActions(@InputPad wrapper) { m_Wrapper = wrapper; }
+        public InputAction @RunL => m_Wrapper.m_Keyboard_RunL;
+        public InputAction @RunR => m_Wrapper.m_Keyboard_RunR;
+        public InputAction @Jump => m_Wrapper.m_Keyboard_Jump;
+        public InputAction @Thunder => m_Wrapper.m_Keyboard_Thunder;
+        public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyboardActions set) { return set.Get(); }
+        public void SetCallbacks(IKeyboardActions instance)
+        {
+            if (m_Wrapper.m_KeyboardActionsCallbackInterface != null)
+            {
+                @RunL.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRunL;
+                @RunL.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRunL;
+                @RunL.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRunL;
+                @RunR.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRunR;
+                @RunR.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRunR;
+                @RunR.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRunR;
+                @Jump.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJump;
+                @Thunder.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnThunder;
+                @Thunder.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnThunder;
+                @Thunder.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnThunder;
+            }
+            m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @RunL.started += instance.OnRunL;
+                @RunL.performed += instance.OnRunL;
+                @RunL.canceled += instance.OnRunL;
+                @RunR.started += instance.OnRunR;
+                @RunR.performed += instance.OnRunR;
+                @RunR.canceled += instance.OnRunR;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Thunder.started += instance.OnThunder;
+                @Thunder.performed += instance.OnThunder;
+                @Thunder.canceled += instance.OnThunder;
+            }
+        }
+    }
+    public KeyboardActions @Keyboard => new KeyboardActions(this);
     public interface IGameplayActions
     {
         void OnRun(InputAction.CallbackContext context);
@@ -534,5 +681,12 @@ public class @InputPad : IInputActionCollection, IDisposable
         void OnIce2(InputAction.CallbackContext context);
         void OnElectric2(InputAction.CallbackContext context);
         void OnFire2(InputAction.CallbackContext context);
+    }
+    public interface IKeyboardActions
+    {
+        void OnRunL(InputAction.CallbackContext context);
+        void OnRunR(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnThunder(InputAction.CallbackContext context);
     }
 }

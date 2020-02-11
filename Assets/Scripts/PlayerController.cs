@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
     private InputPad _gamepad = null;
 
-
     private RaycastHit2D[] _rays = new RaycastHit2D[6]; 
 
     private Rigidbody2D _rig = null;
@@ -29,7 +28,8 @@ public class PlayerController : MonoBehaviour
     private float _inputX = 0;
     private float _coyoteTime = 0;
     private float _coyoteReset = .4f;
-
+    private float _keyVal = 0;
+    
     private bool _inAir = false;
     private bool _onFloor = false;
     private bool _onWall = false;
@@ -50,6 +50,13 @@ public class PlayerController : MonoBehaviour
         //_gamepad.Gameplay.Ice.performed += IceButton => Ice();
         _gamepad.Gameplay.Electric.performed += ElButton => Electric();
         //_gamepad.Gameplay.Time.performed += TimeButton => TimeStop();
+
+        _gamepad.Keyboard.RunL.performed += Key => _keyVal = -Key.ReadValue<float>();
+        _gamepad.Keyboard.RunL.canceled += Key => _keyVal = 0;
+        _gamepad.Keyboard.RunR.performed += Key => _keyVal = Key.ReadValue<float>();
+        _gamepad.Keyboard.RunR.canceled += Key => _keyVal = 0;
+        _gamepad.Keyboard.Jump.performed += Bar => Jump();
+        _gamepad.Keyboard.Thunder.performed += Key => Electric();
     }
 
     private void Start()
@@ -62,9 +69,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // translate stick value to fixed value
-        if (_stickAxis.x > .4f)
+        if (_stickAxis.x > .4f || _keyVal > 0)
             _inputX = 1;
-        else if (_stickAxis.x < -.4f)
+        else if (_stickAxis.x < -.4f || _keyVal < 0)
             _inputX = -1;
         else
             _inputX = 0;
@@ -100,8 +107,18 @@ public class PlayerController : MonoBehaviour
     }
 
     // this is needed for the input system to detect input
-    private void OnEnable() => _gamepad.Gameplay.Enable();
-    private void OnDisable() => _gamepad.Gameplay.Disable();
+    private void OnEnable()
+    {
+        _gamepad.Gameplay.Enable(); 
+        _gamepad.Keyboard.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _gamepad.Gameplay.Disable();
+        _gamepad.Keyboard.Disable();
+
+    } 
 
     void CollisionCheck()
     {
