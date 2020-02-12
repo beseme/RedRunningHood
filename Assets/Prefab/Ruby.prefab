@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 2130638549747535557}
   - component: {fileID: 9164503023375389740}
   - component: {fileID: 9164503023375389780}
+  - component: {fileID: -3758415891033460513}
   m_Layer: 0
   m_Name: Ruby
   m_TagString: Untagged
@@ -314,10 +315,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 8
   _jumpForce: 10
-  _inertia: 50
+  _inertia: 70
   _walljumpForce: 13
   _slideSpeed: 6
-  _walljumpAngle: {x: 1, y: 1}
+  _walljumpAngle: {x: 1, y: 2}
   _ani: {fileID: 9164503024146022459}
   Thunderstone: {fileID: 0}
 --- !u!114 &9164503023375389780
@@ -335,6 +336,21 @@ MonoBehaviour:
   _player: {fileID: 6701086078345403927}
   _ani: {fileID: 9164503024146022459}
   _playerActor: {fileID: 0}
+--- !u!114 &-3758415891033460513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701086078345403921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7733d4b48acada4ea4bb5b24ee2335d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pushSpeed: 8
+  _rig: {fileID: 6701086078345403927}
+  _upForce: 15
 --- !u!1 &9164503023992319530
 GameObject:
   m_ObjectHideFlags: 0

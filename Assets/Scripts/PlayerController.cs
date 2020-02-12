@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private bool _inAir = false;
     private bool _onFloor = false;
     private bool _onWall = false;
+    private bool _wallRight = false;
+    private bool _wallLeft = false;
     private bool _jumpInitiated = false;
 
 
@@ -90,9 +92,15 @@ public class PlayerController : MonoBehaviour
 
         //determine which speed to use
         _rig.velocity = _onFloor ? groundMovement : airMovement;
+        
 
         //slow down when sliding down a wall
-        if (_onWall && _rig.velocity.y <= -_slideSpeed)
+        if (_wallLeft && _inputX == -1 && _rig.velocity.y <= 0)
+        {
+            _ani.SetBool("OnWall", true);
+            _rig.velocity = new Vector2(_rig.velocity.x, -_slideSpeed);
+        }
+        else if(_wallRight && _inputX == 1 && _rig.velocity.y <= 0)
         {
             _ani.SetBool("OnWall", true);
             _rig.velocity = new Vector2(_rig.velocity.x, -_slideSpeed);
@@ -145,6 +153,8 @@ public class PlayerController : MonoBehaviour
         }
         else if(_rays[2] || _rays[3] || _rays[4] || _rays[5])
         {
+            _wallLeft = (_rays[2] || _rays[4]) ? true : false;
+            _wallRight = (_rays[3] || _rays[5]) ? true : false;
             _onFloor = false;
             _onWall = true;
         }
