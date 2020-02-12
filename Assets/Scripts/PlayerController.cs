@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _inertia = 0;
     [SerializeField] private float _walljumpForce = 0;
     [SerializeField] private float _slideSpeed = 0;
+    [SerializeField] private float _fallMultiplier = 0;
     [SerializeField] private Vector2 _walljumpAngle = Vector2.zero;
     [SerializeField] private Animator _ani = null;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private float _coyoteTime = 0;
     private float _coyoteReset = .4f;
     private float _keyVal = 0;
+    private float _jumpPressed = 0;
     
     private bool _inAir = false;
     private bool _onFloor = false;
@@ -48,11 +50,9 @@ public class PlayerController : MonoBehaviour
         _gamepad.Gameplay.Run.performed += Stick => _stickAxis = Stick.ReadValue<Vector2>();
         _gamepad.Gameplay.Run.canceled += Stick => _stickAxis = Vector2.zero;
         _gamepad.Gameplay.Jump.performed += Button => Jump();
-        //_gamepad.Gameplay.Roll.performed += RollButton => Roll();
-        //_gamepad.Gameplay.Ice.performed += IceButton => Ice();
+        _gamepad.Gameplay.Jump.performed += Button => _jumpPressed = Button.ReadValue<float>();
+        _gamepad.Gameplay.Jump.canceled += Button => _jumpPressed = 0;
         _gamepad.Gameplay.Electric.performed += ElButton => Electric();
-        //_gamepad.Gameplay.Time.performed += TimeButton => TimeStop();
-
         _gamepad.Keyboard.RunL.performed += Key => _keyVal = -Key.ReadValue<float>();
         _gamepad.Keyboard.RunL.canceled += Key => _keyVal = 0;
         _gamepad.Keyboard.RunR.performed += Key => _keyVal = Key.ReadValue<float>();
@@ -92,7 +92,12 @@ public class PlayerController : MonoBehaviour
 
         //determine which speed to use
         _rig.velocity = _onFloor ? groundMovement : airMovement;
-        
+
+        //make Jumpheight controllable
+        if (_rig.velocity.y > -3f && !_onWall && _jumpPressed == 0)
+        {
+            _rig.velocity += Time.fixedDeltaTime * Physics2D.gravity.y * (_fallMultiplier - 1) * Vector2.up;
+        }
 
         //slow down when sliding down a wall
         if (_wallLeft && _inputX == -1 && _rig.velocity.y <= 0)
@@ -149,6 +154,8 @@ public class PlayerController : MonoBehaviour
             _inAir = false;
             _onFloor = true;
             _onWall = false;
+            _wallLeft = false;
+            _wallRight = false;
             _coyoteTime = _coyoteReset;
         }
         else if(_rays[2] || _rays[3] || _rays[4] || _rays[5])
@@ -162,6 +169,8 @@ public class PlayerController : MonoBehaviour
         {
             _onFloor = false;
             _onWall = false;
+            _wallLeft = false;
+            _wallRight = false;
             if(_coyoteTime <= 0)
                 _inAir = true;
         }
