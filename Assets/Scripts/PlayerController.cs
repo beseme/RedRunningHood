@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _walljumpForce = 0;
     [SerializeField] private float _slideSpeed = 0;
     [SerializeField] private float _fallMultiplier = 0;
+    [SerializeField] private float _jumpBreak = 0;
     [SerializeField] private Vector2 _walljumpAngle = Vector2.zero;
     [SerializeField] private Animator _ani = null;
 
@@ -94,9 +95,13 @@ public class PlayerController : MonoBehaviour
         _rig.velocity = _onFloor ? groundMovement : airMovement;
 
         //make Jumpheight controllable
-        if (_rig.velocity.y > -3f && !_onWall && _jumpPressed == 0)
+        if (_rig.velocity.y < 0 && _rig.velocity.y > -3f && !_onWall)
         {
             _rig.velocity += Time.fixedDeltaTime * Physics2D.gravity.y * (_fallMultiplier - 1) * Vector2.up;
+        }
+        else if(_rig.velocity.y >= 0 && _jumpPressed != 1 && !_onWall)
+        {
+            _rig.velocity += Time.fixedDeltaTime * Physics2D.gravity.y * (_jumpBreak - 1) * Vector2.up;
         }
 
         //slow down when sliding down a wall
