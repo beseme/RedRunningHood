@@ -12,8 +12,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _slideSpeed = 0;
     [SerializeField] private float _fallMultiplier = 0;
     [SerializeField] private float _jumpBreak = 0;
+    [SerializeField] private float _dashLength = 0;
+    [SerializeField] private float _dashCooldown = 0;
+
     [SerializeField] private Vector2 _walljumpAngle = Vector2.zero;
     [SerializeField] private Animator _ani = null;
+
+    [SerializeField] private ParticleSystem[] _snow = null;
 
 
     private InputPad _gamepad = null;
@@ -24,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     private BoxCollider2D _collider = null;
 
+    private SpriteRenderer _renderer = null;
+
     private Vector2[] _rayOrigins = new Vector2[4];
     private Vector2 _stickAxis = Vector2.zero;
 
@@ -32,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private float _coyoteReset = .4f;
     private float _keyVal = 0;
     private float _jumpPressed = 0;
+    private float _dashDirection = 0;
     
     private bool _inAir = false;
     private bool _onFloor = false;
@@ -39,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private bool _wallRight = false;
     private bool _wallLeft = false;
     private bool _jumpInitiated = false;
+    private bool _dashing = false;
+    private bool _dashPossible = true;
 
 
     public ElectricObject Thunderstone = null;
@@ -54,12 +64,15 @@ public class PlayerController : MonoBehaviour
         _gamepad.Gameplay.Jump.performed += Button => _jumpPressed = Button.ReadValue<float>();
         _gamepad.Gameplay.Jump.canceled += Button => _jumpPressed = 0;
         _gamepad.Gameplay.Electric.performed += ElButton => Electric();
+        _gamepad.Gameplay.Roll.performed += RollButton => StartDash(_inputX);
+
         _gamepad.Keyboard.RunL.performed += Key => _keyVal = -Key.ReadValue<float>();
         _gamepad.Keyboard.RunL.canceled += Key => _keyVal = 0;
         _gamepad.Keyboard.RunR.performed += Key => _keyVal = Key.ReadValue<float>();
         _gamepad.Keyboard.RunR.canceled += Key => _keyVal = 0;
         _gamepad.Keyboard.Jump.performed += Bar => Jump();
         _gamepad.Keyboard.Thunder.performed += Key => Electric();
+        
     }
 
     private void Start()
@@ -67,6 +80,8 @@ public class PlayerController : MonoBehaviour
         _rig = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
         _walljumpAngle = Vector2.ClampMagnitude(_walljumpAngle, 1);
+        _renderer = GetComponent<SpriteRenderer>();
+        for(int i=0; i < _snow.Length; i++) { _snow[i].Stop(); }
     }
 
     private void Update()
@@ -121,7 +136,11 @@ public class PlayerController : MonoBehaviour
 
 
         //check for collisions with floor and rails
-        CollisionCheck();       
+        CollisionCheck();
+
+        //Dash
+        if (_dashing)
+            Dash();
     }
 
     // this is needed for the input system to detect input
@@ -215,6 +234,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Icedash Implementation
+    void StartDash(float direction)
+    {
+        if(_dashPossible && direction != 0)
+        {
+            _dashPossible = false;
+            _renderer.enabled = false;
+            for (int i = 0; i < _snow.Length; i++) { _snow[i].Play(); }
+            _dashing = true;
+            _dashDirection = direction * _dashLength;
+            StartCoroutine(DashRoutine());
+        }
+    }
+
+    void Dash() => _rig.velocity = Vector2.right * _dashDirection;
+
     //Remove Thunderstone
     void Electric()
     {
@@ -238,5 +273,16 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(.45f);
         _jumpInitiated = false;
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        yield return new WaitForSeconds(.3f);
+        _dashing = false;
+        _renderer.enabled = true;
+        for (int i = 0; i < _snow.Length; i++) { _snow[i].Stop(); }
+
+        yield return new WaitForSeconds(_dashCooldown -.3f);
+        _dashPossible = true;
     }
 }
