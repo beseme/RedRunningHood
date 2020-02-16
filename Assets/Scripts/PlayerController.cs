@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator _ani = null;
 
     [SerializeField] private ParticleSystem[] _snow = null;
+    [SerializeField] private ParticleSystem[] _fire = null;
 
 
     private InputPad _gamepad = null;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private bool _jumpInitiated = false;
     private bool _dashing = false;
     private bool _dashPossible = true;
+    private bool _doublejumpPossible = false;
 
 
     public ElectricObject Thunderstone = null;
@@ -82,6 +84,7 @@ public class PlayerController : MonoBehaviour
         _walljumpAngle = Vector2.ClampMagnitude(_walljumpAngle, 1);
         _renderer = GetComponent<SpriteRenderer>();
         for(int i=0; i < _snow.Length; i++) { _snow[i].Stop(); }
+        for (int i = 0; i < _fire.Length; i++) { _fire[i].Stop(); }
     }
 
     private void Update()
@@ -175,6 +178,7 @@ public class PlayerController : MonoBehaviour
 
         if (_rays[0] || _rays[1])
         {
+            _doublejumpPossible = true;
             _inAir = false;
             _onFloor = true;
             _onWall = false;
@@ -184,6 +188,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(_rays[2] || _rays[3] || _rays[4] || _rays[5])
         {
+            _doublejumpPossible = true;
             _wallLeft = (_rays[2] || _rays[4]) ? true : false;
             _wallRight = (_rays[3] || _rays[5]) ? true : false;
             _onFloor = false;
@@ -214,6 +219,14 @@ public class PlayerController : MonoBehaviour
         else if (_onWall)
         {
             Walljump();
+        }
+        else if (_doublejumpPossible)
+        {
+            _rig.velocity = Vector2.right * _rig.velocity;
+            _rig.AddForce(Vector2.up * _jumpForce * 60);
+            _doublejumpPossible = false;
+            for (int i = 0; i < _fire.Length; i++) { _fire[i].Play(); }
+            StartCoroutine(DoubleJumpRoutine());
         }
         else StartCoroutine(BufferjumpRoutine());
     }
@@ -273,6 +286,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(.45f);
         _jumpInitiated = false;
+    }
+
+    private IEnumerator DoubleJumpRoutine()
+    {
+        yield return new WaitForSeconds(.4f);
+        for (int i = 0; i < _fire.Length; i++) { _fire[i].Stop(); }
     }
 
     private IEnumerator DashRoutine()
