@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class GlobalParticles : MonoBehaviour
 {
+   [SerializeField] private float _offset = 0; 
    public Transform PlayerPos = null;
 
    private void Update()
    {      
-      gameObject.transform.position = new Vector3(PlayerPos.position.x,gameObject.transform.position.y,gameObject.transform.position.z);
+      gameObject.transform.position = new Vector3(PlayerPos.position.x, PlayerPos.position.y - _offset, gameObject.transform.position.z);
    }
 }

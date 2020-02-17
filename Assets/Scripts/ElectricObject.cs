@@ -23,7 +23,6 @@ public class ElectricObject : MonoBehaviour
         _lightning.enabled = false;
         _flash = GetComponent<PostProcessVolume>();
         _flash.enabled = false;
-        Debug.Break();
     }
 
     private void OnBecameVisible() => _onScreen = true;

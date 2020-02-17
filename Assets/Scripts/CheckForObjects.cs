@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
+//using UnityEngine.WSA;
 
 public class CheckForObjects : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class CheckForObjects : MonoBehaviour
         var cam = UnityEngine.Camera.main; 
         var size = new Vector2(Trigonometry() * cam.aspect, Trigonometry());
         _coll.size = size;
-        Debug.DrawRay(gameObject.transform.position, (Vector3)_coll.size, Color.cyan, Time.deltaTime);
+        //Debug.DrawRay(gameObject.transform.position, (Vector3)_coll.size, Color.cyan, Time.deltaTime);
     }
 
     private float Trigonometry()
