@@ -342,6 +342,14 @@ public class @InputPad : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ice"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e33d20a-e652-4ec0-84d9-44e9cc23738a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -388,6 +396,17 @@ public class @InputPad : IInputActionCollection, IDisposable
                     ""action"": ""Thunder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8deae58-3a36-4c11-9319-41c97a6e4f37"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ice"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -417,6 +436,7 @@ public class @InputPad : IInputActionCollection, IDisposable
         m_Keyboard_RunR = m_Keyboard.FindAction("RunR", throwIfNotFound: true);
         m_Keyboard_Jump = m_Keyboard.FindAction("Jump", throwIfNotFound: true);
         m_Keyboard_Thunder = m_Keyboard.FindAction("Thunder", throwIfNotFound: true);
+        m_Keyboard_Ice = m_Keyboard.FindAction("Ice", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -615,6 +635,7 @@ public class @InputPad : IInputActionCollection, IDisposable
     private readonly InputAction m_Keyboard_RunR;
     private readonly InputAction m_Keyboard_Jump;
     private readonly InputAction m_Keyboard_Thunder;
+    private readonly InputAction m_Keyboard_Ice;
     public struct KeyboardActions
     {
         private @InputPad m_Wrapper;
@@ -623,6 +644,7 @@ public class @InputPad : IInputActionCollection, IDisposable
         public InputAction @RunR => m_Wrapper.m_Keyboard_RunR;
         public InputAction @Jump => m_Wrapper.m_Keyboard_Jump;
         public InputAction @Thunder => m_Wrapper.m_Keyboard_Thunder;
+        public InputAction @Ice => m_Wrapper.m_Keyboard_Ice;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -644,6 +666,9 @@ public class @InputPad : IInputActionCollection, IDisposable
                 @Thunder.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnThunder;
                 @Thunder.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnThunder;
                 @Thunder.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnThunder;
+                @Ice.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIce;
+                @Ice.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIce;
+                @Ice.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIce;
             }
             m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -660,6 +685,9 @@ public class @InputPad : IInputActionCollection, IDisposable
                 @Thunder.started += instance.OnThunder;
                 @Thunder.performed += instance.OnThunder;
                 @Thunder.canceled += instance.OnThunder;
+                @Ice.started += instance.OnIce;
+                @Ice.performed += instance.OnIce;
+                @Ice.canceled += instance.OnIce;
             }
         }
     }
@@ -688,5 +716,6 @@ public class @InputPad : IInputActionCollection, IDisposable
         void OnRunR(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnThunder(InputAction.CallbackContext context);
+        void OnIce(InputAction.CallbackContext context);
     }
 }

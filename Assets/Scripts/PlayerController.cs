@@ -73,8 +73,11 @@ public class PlayerController : MonoBehaviour
         _gamepad.Keyboard.RunR.performed += Key => _keyVal = Key.ReadValue<float>();
         _gamepad.Keyboard.RunR.canceled += Key => _keyVal = 0;
         _gamepad.Keyboard.Jump.performed += Bar => Jump();
+        _gamepad.Keyboard.Jump.performed += Bar => _jumpPressed = Bar.ReadValue<float>();
+        _gamepad.Keyboard.Jump.performed += Bar => _jumpPressed = 0;
         _gamepad.Keyboard.Thunder.performed += Key => Electric();
-        
+        _gamepad.Keyboard.Ice.performed += Key => StartDash(_inputX);
+
     }
 
     private void Start()

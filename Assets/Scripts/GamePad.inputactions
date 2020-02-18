@@ -329,6 +329,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Ice",
+                    "type": "Button",
+                    "id": "1e33d20a-e652-4ec0-84d9-44e9cc23738a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -373,6 +381,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thunder",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8deae58-3a36-4c11-9319-41c97a6e4f37",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ice",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
