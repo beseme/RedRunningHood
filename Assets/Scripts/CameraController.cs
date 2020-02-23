@@ -14,15 +14,11 @@ public class CameraController : MonoBehaviour
 
     private bool _shaking = false;
 
+    private float _shakeTime = 0;
+
     private void Awake()
     {
         _noise = _vCam.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.S))
-            StartShake();
     }
 
     private void LateUpdate()
@@ -36,15 +32,16 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void StartShake()
+    public void StartShake(float time)
     {
+        _shakeTime = time;
         StartCoroutine(ShakeRoutine());
     }
 
     private IEnumerator ShakeRoutine()
     {
         _shaking = true;
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(_shakeTime);
         _shaking = false;
         _noise.m_AmplitudeGain = 0;
         _noise.m_FrequencyGain = 0;
