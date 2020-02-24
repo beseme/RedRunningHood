@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/GamePad.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Player/GamePad.inputactions'
 
 using System;
 using System.Collections;
@@ -134,6 +134,14 @@ public class @InputPad : IInputActionCollection, IDisposable
                     ""name"": ""Fire2"",
                     ""type"": ""Button"",
                     ""id"": ""67dd587e-e8b1-4d53-84a6-aa2c9694cff5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""8004bdfe-fd27-41e4-b675-c8199b9eecf3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -304,6 +312,17 @@ public class @InputPad : IInputActionCollection, IDisposable
                     ""action"": ""Fire2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7fbe1c6a-47b8-4abf-b5d3-9e3149782444"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -430,6 +449,7 @@ public class @InputPad : IInputActionCollection, IDisposable
         m_Gameplay_Ice2 = m_Gameplay.FindAction("Ice2", throwIfNotFound: true);
         m_Gameplay_Electric2 = m_Gameplay.FindAction("Electric2", throwIfNotFound: true);
         m_Gameplay_Fire2 = m_Gameplay.FindAction("Fire2", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_RunL = m_Keyboard.FindAction("RunL", throwIfNotFound: true);
@@ -501,6 +521,7 @@ public class @InputPad : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Ice2;
     private readonly InputAction m_Gameplay_Electric2;
     private readonly InputAction m_Gameplay_Fire2;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @InputPad m_Wrapper;
@@ -520,6 +541,7 @@ public class @InputPad : IInputActionCollection, IDisposable
         public InputAction @Ice2 => m_Wrapper.m_Gameplay_Ice2;
         public InputAction @Electric2 => m_Wrapper.m_Gameplay_Electric2;
         public InputAction @Fire2 => m_Wrapper.m_Gameplay_Fire2;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -574,6 +596,9 @@ public class @InputPad : IInputActionCollection, IDisposable
                 @Fire2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
                 @Fire2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
                 @Fire2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFire2;
+                @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -623,6 +648,9 @@ public class @InputPad : IInputActionCollection, IDisposable
                 @Fire2.started += instance.OnFire2;
                 @Fire2.performed += instance.OnFire2;
                 @Fire2.canceled += instance.OnFire2;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -709,6 +737,7 @@ public class @InputPad : IInputActionCollection, IDisposable
         void OnIce2(InputAction.CallbackContext context);
         void OnElectric2(InputAction.CallbackContext context);
         void OnFire2(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IKeyboardActions
     {

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem[] _snow = null;
     [SerializeField] private ParticleSystem[] _fire = null;
 
+    [SerializeField] private LevelUI _ui = null;
 
     private InputPad _gamepad = null;
 
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
         _gamepad.Gameplay.Jump.canceled += Button => _jumpPressed = 0;
         _gamepad.Gameplay.Electric.performed += ElButton => Electric();
         _gamepad.Gameplay.Roll.performed += RollButton => StartDash(_inputX);
+        _gamepad.Gameplay.Pause.performed += PauseButton => Pause();
 
         _gamepad.Keyboard.RunL.performed += Key => _keyVal = -Key.ReadValue<float>();
         _gamepad.Keyboard.RunL.canceled += Key => _keyVal = 0;
@@ -271,6 +273,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Thunderstone)
             Thunderstone.GetComponent<ElectricObject>().DrawLine();
+    }
+
+    void Pause()
+    {
+        //_ui.Menu();
     }
 
     // Bufferjump Implementation
