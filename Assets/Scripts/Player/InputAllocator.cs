@@ -1,13 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InputAllocator : MonoBehaviour
 {
+    [SerializeField] private PlayerController _player = null;
+    [SerializeField] private LevelUI _ui = null;
+    
     private InputPad _input = null;
 
     private Vector2 _stickAxis = Vector2.zero;
-
+    
     private float _jumpPressed = 0;
     private float _inputX = 0;
     private float _keyVal = 0;
@@ -32,28 +36,55 @@ public class InputAllocator : MonoBehaviour
         _input.Keyboard.RunR.canceled += Key => _keyVal = 0;
         _input.Keyboard.Jump.performed += Bar => Jump();
         _input.Keyboard.Jump.performed += Bar => _jumpPressed = Bar.ReadValue<float>();
-        _input.Keyboard.Jump.performed += Bar => _jumpPressed = 0;
+        _input.Keyboard.Jump.canceled += Bar => _jumpPressed = 0;
         _input.Keyboard.Thunder.performed += Key => Electric();
         _input.Keyboard.Ice.performed += Key => StartDash(_inputX);
+    }
+    
+    private void OnEnable()
+    {
+        _input.Gameplay.Enable(); 
+        _input.Keyboard.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _input.Gameplay.Disable();
+        _input.Keyboard.Disable();
+    }
+
+    private void Update()
+    {
+        _player.JumpPressed = _jumpPressed;
+        
+        // translate stick value to fixed value
+        if (_stickAxis.x > .4f || _keyVal > 0)
+            _inputX = 1;
+        else if (_stickAxis.x < -.4f || _keyVal < 0)
+            _inputX = -1;
+        else
+            _inputX = 0;
+
+        _player.InputX = _inputX;
     }
 
     void Jump()
     {
-
+        _player.Jump();
     }
 
     void Electric()
     {
-
+        _player.Electric();
     }
 
     void StartDash(float input)
     {
-
+        _player.StartDash(input);
     }
 
     void Pause()
     {
-
+        _ui.Menu();
     }
 }

@@ -9,18 +9,10 @@ public class LevelUI : MonoBehaviour
     [SerializeField] private Transform _followPos = null;
     [SerializeField] private GameObject _uiPanel = null; 
 
-    private InputPad _input = null;
 
     private Text _text = null;
 
     private float _distance = 0;
-
-    private void Awake()
-    {
-        _input = new InputPad();
-
-        _input.Gameplay.Pause.performed += Button => Menu();
-    }
 
     void Start()
     {
@@ -38,16 +30,6 @@ public class LevelUI : MonoBehaviour
             _text.color = Color.white;
         else
             _text.color = Color.green;
-    }
-
-    private void OnEnable()
-    {
-        _input.Gameplay.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _input.Gameplay.Disable();
     }
 
     public void Menu()

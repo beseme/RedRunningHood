@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LevelUI _ui = null;
 
-    private InputPad _gamepad = null;
+    //private InputPad _gamepad = null;
 
     private RaycastHit2D[] _rays = new RaycastHit2D[6]; 
 
@@ -34,12 +34,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _renderer = null;
 
     private Vector2[] _rayOrigins = new Vector2[4];
-    private Vector2 _stickAxis = Vector2.zero;
 
     private float _inputX = 0;
     private float _coyoteTime = 0;
     private float _coyoteReset = .4f;
-    private float _keyVal = 0;
     private float _jumpPressed = 0;
     private float _dashDirection = 0;
     
@@ -56,30 +54,15 @@ public class PlayerController : MonoBehaviour
 
     public ElectricObject Thunderstone = null;
 
-
-    private void Awake()
+    public float JumpPressed
     {
-        _gamepad = new InputPad();
-        // ---------- Actual Gamepad ----------
-        _gamepad.Gameplay.Run.performed += Stick => _stickAxis = Stick.ReadValue<Vector2>();
-        _gamepad.Gameplay.Run.canceled += Stick => _stickAxis = Vector2.zero;
-        _gamepad.Gameplay.Jump.performed += Button => Jump();
-        _gamepad.Gameplay.Jump.performed += Button => _jumpPressed = Button.ReadValue<float>();
-        _gamepad.Gameplay.Jump.canceled += Button => _jumpPressed = 0;
-        _gamepad.Gameplay.Electric.performed += ElButton => Electric();
-        _gamepad.Gameplay.Roll.performed += RollButton => StartDash(_inputX);
-        _gamepad.Gameplay.Pause.performed += PauseButton => Pause();
-
-        _gamepad.Keyboard.RunL.performed += Key => _keyVal = -Key.ReadValue<float>();
-        _gamepad.Keyboard.RunL.canceled += Key => _keyVal = 0;
-        _gamepad.Keyboard.RunR.performed += Key => _keyVal = Key.ReadValue<float>();
-        _gamepad.Keyboard.RunR.canceled += Key => _keyVal = 0;
-        _gamepad.Keyboard.Jump.performed += Bar => Jump();
-        _gamepad.Keyboard.Jump.performed += Bar => _jumpPressed = Bar.ReadValue<float>();
-        _gamepad.Keyboard.Jump.performed += Bar => _jumpPressed = 0;
-        _gamepad.Keyboard.Thunder.performed += Key => Electric();
-        _gamepad.Keyboard.Ice.performed += Key => StartDash(_inputX);
-
+        get => _jumpPressed;
+        set => _jumpPressed = value;
+    }
+    public float InputX
+    {
+        get => _inputX;
+        set => _inputX = value;
     }
 
     private void Start()
@@ -94,13 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // translate stick value to fixed value
-        if (_stickAxis.x > .4f || _keyVal > 0)
-            _inputX = 1;
-        else if (_stickAxis.x < -.4f || _keyVal < 0)
-            _inputX = -1;
-        else
-            _inputX = 0;
+       
 
         //wait for coyotetime to run out before setting inAir to true
         _coyoteTime -= Time.deltaTime;
@@ -151,20 +128,6 @@ public class PlayerController : MonoBehaviour
             Dash();
     }
 
-    // this is needed for the input system to detect input
-    private void OnEnable()
-    {
-        _gamepad.Gameplay.Enable(); 
-        _gamepad.Keyboard.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _gamepad.Gameplay.Disable();
-        _gamepad.Keyboard.Disable();
-
-    } 
-
     void CollisionCheck()
     {
         //set ray origins to the bottom corners of the player collider
@@ -212,7 +175,7 @@ public class PlayerController : MonoBehaviour
 
     // Jump Implementation
 
-    void Jump()
+    public void Jump()
     {
         if (!_inAir && !_jumpInitiated)
         {
@@ -253,7 +216,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Icedash Implementation
-    void StartDash(float direction)
+    public void StartDash(float direction)
     {
         if(_dashPossible && direction != 0)
         {
@@ -269,16 +232,12 @@ public class PlayerController : MonoBehaviour
     void Dash() => _rig.velocity = Vector2.right * _dashDirection;
 
     //Remove Thunderstone
-    void Electric()
+    public void Electric()
     {
         if (Thunderstone)
             Thunderstone.GetComponent<ElectricObject>().DrawLine();
     }
-
-    void Pause()
-    {
-        //_ui.Menu();
-    }
+    
 
     // Bufferjump Implementation
     private IEnumerator BufferjumpRoutine()

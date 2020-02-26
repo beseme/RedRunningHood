@@ -39,7 +39,5 @@ public class SpriteHandler : MonoBehaviour
         //_ani.SetFloat("HorizontalSpeed", Mathf.Abs(_player.velocity.x)/ _playerActor.Speed);
         _ani.SetFloat("HorizontalSpeed", Mathf.Abs(_player.velocity.x));
         _ani.SetFloat("VerticalSpeed", _player.velocity.y);
-       
-        Debug.Log(_player.velocity.y);
     }
 }
