@@ -42,10 +42,12 @@ public class Cutscene : MonoBehaviour
 
     private void Update()
     {
-        if(_letterBox.weight <= 1 && !_letterBoxing)
-            _letterBox.weight -= Time.deltaTime*10;
-        else if(_letterBox.weight >= 0 && _letterBoxing)
-            _letterBox.weight += Time.deltaTime*10;
+        if (_letterBox.weight <= 1 && _letterBox.weight >= 0)
+            _letterBox.weight += _letterBoxing ? Time.deltaTime*5 : -Time.deltaTime;
+        else if (_letterBox.weight > 1 && _letterBoxing)
+            _letterBox.weight = 1;
+        else
+            _letterBox.weight = 0;
 
     }
 
